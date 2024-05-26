@@ -1,0 +1,727 @@
+{
+  "branches_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+
+    ]
+  },
+  "branches_fall": {
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/branches_fall",
+        "pitch": 0.75,
+        "volume": 0.5,
+        "weight": 1
+      }
+    ]
+  },
+  "branches_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/branches_step1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step5",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step6",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "branches_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "branches_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/branches_step1",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step2",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step3",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step4",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step5",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/branches_step6",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      }
+    ]
+  },
+  "leafy_branches_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/leafy_branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "leafy_branches_fall": {
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/leafy_branches_fall",
+        "pitch": 0.75,
+        "volume": 0.5,
+        "weight": 1
+      }
+    ]
+  },
+  "leafy_branches_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/leafy_branches_step1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step5",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step6",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "leafy_branches_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/leafy_branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "leafy_branches_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/leafy_branches_step1",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step2",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step3",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step4",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step5",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/leafy_branches_step6",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      }
+    ]
+  },
+  "blossoming_cherry_branches_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "blossoming_cherry_branches_fall": {
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_fall",
+        "pitch": 0.75,
+        "volume": 0.5,
+        "weight": 1
+      }
+    ]
+  },
+  "blossoming_cherry_branches_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step5",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step6",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "blossoming_cherry_branches_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "blossoming_cherry_branches_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step1",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step2",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step3",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step4",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step5",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/blossoming_cherry_branches_step6",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      }
+    ]
+  },
+  "dew_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "block/pointed_dripstone/drip_water1",
+      "block/pointed_dripstone/drip_water2",
+      "block/pointed_dripstone/drip_water3",
+      "block/pointed_dripstone/drip_water4",
+      "block/pointed_dripstone/drip_water5",
+      "block/pointed_dripstone/drip_water6",
+      "block/pointed_dripstone/drip_water7",
+      "block/pointed_dripstone/drip_water8",
+      "block/pointed_dripstone/drip_water9",
+      "block/pointed_dripstone/drip_water10",
+      "block/pointed_dripstone/drip_water11",
+      "block/pointed_dripstone/drip_water12",
+      "block/pointed_dripstone/drip_water13",
+      "block/pointed_dripstone/drip_water14",
+      "block/pointed_dripstone/drip_water15"
+
+    ]
+  },
+  "dew_fall_intentionally_empty": {
+    "sounds": [
+    ]
+  },
+  "dew_hit_intentionally_empty": {
+    "sounds": [
+    ]
+  },
+  "dew_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "block/pointed_dripstone/drip_water1",
+      "block/pointed_dripstone/drip_water2",
+      "block/pointed_dripstone/drip_water3",
+      "block/pointed_dripstone/drip_water4",
+      "block/pointed_dripstone/drip_water5",
+      "block/pointed_dripstone/drip_water6",
+      "block/pointed_dripstone/drip_water7",
+      "block/pointed_dripstone/drip_water8",
+      "block/pointed_dripstone/drip_water9",
+      "block/pointed_dripstone/drip_water10",
+      "block/pointed_dripstone/drip_water11",
+      "block/pointed_dripstone/drip_water12",
+      "block/pointed_dripstone/drip_water13",
+      "block/pointed_dripstone/drip_water14",
+      "block/pointed_dripstone/drip_water15"
+
+    ]
+  },
+  "dew_step_intentionally_empty": {
+    "sounds": [
+    ]
+  },
+  "frost_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow2",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow3",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow4",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "frost_fall": {
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "pitch": 1.25,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "step/snow2",
+        "pitch": 1.25,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "step/snow3",
+        "pitch": 1.25,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "step/snow4",
+        "pitch": 1.25,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "frost_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "step/snow1",
+      "step/snow2",
+      "step/snow3",
+      "step/snow4"
+    ]
+  },
+  "frost_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow2",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow3",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/snow4",
+        "pitch": 1.5,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "frost_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "pitch": 2.0,
+        "volume": 0.75,
+        "weight": 1
+      },
+      {
+        "name": "step/snow2",
+        "pitch": 2.0,
+        "volume": 0.75,
+        "weight": 1
+      },
+      {
+        "name": "step/snow3",
+        "pitch": 2.0,
+        "volume": 0.75,
+        "weight": 1
+      },
+      {
+        "name": "step/snow4",
+        "pitch": 2.0,
+        "volume": 0.75,
+        "weight": 1
+      }
+    ]
+  },
+  "fallen_leaves_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dig/grass1",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass2",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass3",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass4",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "fallen_leaves_fall": {
+    "sounds": [
+      {
+        "name": "dig/grass1",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass2",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass3",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass4",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "fallen_leaves_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dig/grass1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "fallen_leaves_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dig/grass1",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass2",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass3",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass4",
+        "pitch": 1.0,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "fallen_leaves_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dig/grass1",
+        "pitch": 0.4,
+        "volume": 0.225,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass2",
+        "pitch": 0.4,
+        "volume": 0.225,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass3",
+        "pitch": 0.4,
+        "volume": 0.225,
+        "weight": 1
+      },
+      {
+        "name": "dig/grass4",
+        "pitch": 0.4,
+        "volume": 0.225,
+        "weight": 1
+      }
+    ]
+  }
+}

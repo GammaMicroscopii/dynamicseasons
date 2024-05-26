@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.gammamicroscopii.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"FoliageColorsMixin",
+		"GrassColorsMixin",
+		"OverworldBiomeCreatorMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

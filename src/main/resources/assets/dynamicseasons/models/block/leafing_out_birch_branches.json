@@ -1,0 +1,8 @@
+{
+  "parent": "dynamicseasons:block/tinted_overlay_cube",
+  "textures": {
+    "particle": "dynamicseasons:block/leafing_out_birch_branches",
+    "layer0": "dynamicseasons:block/leafing_out_birch_branches",
+    "overlay": "dynamicseasons:block/leafing_out_birch_branches_overlay"
+  }
+}

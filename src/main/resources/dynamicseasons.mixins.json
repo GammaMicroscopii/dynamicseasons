@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.gammamicroscopii.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BiomeMixin",
+		"OverworldBiomeCreatorMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

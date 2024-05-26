@@ -1,0 +1,56 @@
+{
+  "parent": "item/generated",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ -22.5, -22.5, -45 ],
+      "translation": [ -2.625, 2.65, 0 ],
+      "scale": [ 0.525, 0.525, 0.525 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -22.5, -22.5, -135 ],
+      "translation": [ -2.625, 2.65, 0 ],
+      "scale": [ 0.525, 0.525, 0.525 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 45, -20, -67.5 ],
+      "translation": [ -4.625, 3, 0.5 ],
+      "scale": [ 0.5875, 0.5875, 0.5875 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 45, -20, -157.5 ],
+      "translation": [ -4.625, 3, 0.5 ],
+      "scale": [ 0.5875, 0.5875, 0.5875 ]
+    }
+  },
+  "textures": {
+    "layer0": "dynamicseasons:item/thermometer_00"
+  },
+  "overrides": [
+    { "predicate": { "displayed_temperature": 0.00000000 }, "model": "dynamicseasons:item/thermometer" },
+    { "predicate": { "displayed_temperature": 0.03846154 }, "model": "dynamicseasons:item/thermometer_01" },
+    { "predicate": { "displayed_temperature": 0.07692308 }, "model": "dynamicseasons:item/thermometer_02" },
+    { "predicate": { "displayed_temperature": 0.11538462 }, "model": "dynamicseasons:item/thermometer_03" },
+    { "predicate": { "displayed_temperature": 0.15384615 }, "model": "dynamicseasons:item/thermometer_04" },
+    { "predicate": { "displayed_temperature": 0.19230769 }, "model": "dynamicseasons:item/thermometer_05" },
+    { "predicate": { "displayed_temperature": 0.23076923 }, "model": "dynamicseasons:item/thermometer_06" },
+    { "predicate": { "displayed_temperature": 0.26923077 }, "model": "dynamicseasons:item/thermometer_07" },
+    { "predicate": { "displayed_temperature": 0.30769231 }, "model": "dynamicseasons:item/thermometer_08" },
+    { "predicate": { "displayed_temperature": 0.34615385 }, "model": "dynamicseasons:item/thermometer_09" },
+    { "predicate": { "displayed_temperature": 0.38461538 }, "model": "dynamicseasons:item/thermometer_10" },
+    { "predicate": { "displayed_temperature": 0.42307692 }, "model": "dynamicseasons:item/thermometer_11" },
+    { "predicate": { "displayed_temperature": 0.46153846 }, "model": "dynamicseasons:item/thermometer_12" },
+    { "predicate": { "displayed_temperature": 0.50000000 }, "model": "dynamicseasons:item/thermometer_13" },
+    { "predicate": { "displayed_temperature": 0.53846154 }, "model": "dynamicseasons:item/thermometer_14" },
+    { "predicate": { "displayed_temperature": 0.57692308 }, "model": "dynamicseasons:item/thermometer_15" },
+    { "predicate": { "displayed_temperature": 0.61538462 }, "model": "dynamicseasons:item/thermometer_16" },
+    { "predicate": { "displayed_temperature": 0.65384615 }, "model": "dynamicseasons:item/thermometer_17" },
+    { "predicate": { "displayed_temperature": 0.69230769 }, "model": "dynamicseasons:item/thermometer_18" },
+    { "predicate": { "displayed_temperature": 0.73076923 }, "model": "dynamicseasons:item/thermometer_19" },
+    { "predicate": { "displayed_temperature": 0.76923077 }, "model": "dynamicseasons:item/thermometer_20" },
+    { "predicate": { "displayed_temperature": 0.80769231 }, "model": "dynamicseasons:item/thermometer_21" },
+    { "predicate": { "displayed_temperature": 0.84615385 }, "model": "dynamicseasons:item/thermometer_22" },
+    { "predicate": { "displayed_temperature": 0.88461538 }, "model": "dynamicseasons:item/thermometer_23" },
+    { "predicate": { "displayed_temperature": 0.92307692 }, "model": "dynamicseasons:item/thermometer_24" },
+    { "predicate": { "displayed_temperature": 0.96153846 }, "model": "dynamicseasons:item/thermometer_25" }
+  ]
+}

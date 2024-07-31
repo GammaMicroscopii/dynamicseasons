@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "dynamicseasons:block/fallen_leaves_top",
+    "side": "dynamicseasons:block/fallen_leaves_side"
+  }
+}

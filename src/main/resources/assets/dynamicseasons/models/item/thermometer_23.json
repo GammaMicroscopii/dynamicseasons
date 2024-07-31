@@ -1,0 +1,6 @@
+{
+  "parent": "dynamicseasons:item/thermometer",
+  "textures": {
+    "layer0": "dynamicseasons:item/thermometer_23"
+  }
+}

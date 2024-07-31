@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "dynamicseasons",
+	"version": "${version}",
+	"name": "Example mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"GammaMicroscopii"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/dynamicseasons/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.gammamicroscopii.DynamicSeasons"
+		],
+		"client": [
+			"com.gammamicroscopii.client_init.DynamicSeasonsClient"
+		]
+	},
+	"mixins": [
+		"dynamicseasons.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.6",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	},
+	"accessWidener" : "dynamicseasons.accesswidener"
+}

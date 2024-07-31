@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "com.gammamicroscopii.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BiomeMixin",
+		"OverworldBiomeCreatorMixin",
+		"FoliageColorsMixin",
+		"GrassColorsMixin",
+		"ServerWorldMixin",
+		"TimeCommandMixin",
+		"ServerChunkManagerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

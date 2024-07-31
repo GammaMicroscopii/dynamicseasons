@@ -1,0 +1,58 @@
+{
+  "conversions": [
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:discolored_dark_oak_leaves" },
+      "start_season": 0.41666666666666667,
+      "end_season": 0.46666666666666667
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:unstable_dark_oak_leaves" },
+      "start_season": 0.46666666666666667,
+      "end_season": 0.51666666666666667
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:falling_dark_oak_leaves" },
+      "start_season": 0.51666666666666667,
+      "end_season": 0.56666666666666667
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:dark_oak_branches" },
+      "start_season": 0.56666666666666667,
+      "end_season": 0.61666666666666667
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:leafing_out_dark_oak_branches" },
+      "start_season": 0.85833333333333333,
+      "end_season": 0.90833333333333333
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "minecraft:dark_oak_leaves" },
+      "start_season": 0.90833333333333333,
+      "end_season": 0.95833333333333333
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 package com.gammamicroscopii.resourceload.data;
 
+import com.gammamicroscopii.DynamicSeasons;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,9 +14,11 @@ public class SeasonalBlockCycle {
 	final Conversion[] conversions;
 	final float[] intervalChangeSeasons;
 	final String[] blockIds;
-	Float beginningIntervalCache = null;
-	Float endIntervalCache = null;
-	Pair<Integer, Boolean> cycleStageCache = null;
+	float currentIntervalBeginning;
+	float currentIntervalEnd;
+	//Pair<Integer, Boolean> currentCycleStageAsPair = null;
+	int currentConversionIndex;
+	boolean isConversionInProgress;
 
 	SeasonalBlockCycle(Conversion[] conversions) {
 		this.conversions = conversions;
@@ -34,14 +37,14 @@ public class SeasonalBlockCycle {
 		return conversions;
 	}
 
-	public Pair<Integer, Boolean> getCycleStage(float season) {
-		if (!(beginningIntervalCache == null || endIntervalCache == null || cycleStageCache == null)) {
-			if (hasJustWrappedAround(beginningIntervalCache, endIntervalCache)) {
-				if (season > beginningIntervalCache || season < endIntervalCache) return cycleStageCache;
+	public void updateCycleStage(float season) {
+		//if (!(currentIntervalBeginning == null || currentIntervalEnd == null || currentConversionIndex == null || isConversionInProgress == null)) {
+			if (hasJustWrappedAround(currentIntervalBeginning, currentIntervalEnd)) {
+				if (season > currentIntervalBeginning || season < currentIntervalEnd) return;
 			} else {
-				if (season > beginningIntervalCache && season < endIntervalCache) return cycleStageCache;
+				if (season > currentIntervalBeginning && season < currentIntervalEnd) return;
 			}
-		}
+		//}
 
 		int intervalIndex = 0;
 
@@ -64,36 +67,45 @@ public class SeasonalBlockCycle {
 			if (i >= intervalChangeSeasons.length) i -= intervalChangeSeasons.length;
 		}
 
-		beginningIntervalCache = previousInterval(intervalIndex);
-		endIntervalCache = intervalChangeSeasons[intervalIndex];
+		currentIntervalBeginning = previousInterval(intervalIndex);
+		currentIntervalEnd = intervalChangeSeasons[intervalIndex];
 
-		//MEANING: new Pair (interval index / 2 [=the conversion in progress, or the next to start if none], intervalindex == odd [=conversion is in progress])
-		Pair<Integer, Boolean> pair = new Pair<>(intervalIndex >> 1, (intervalIndex & 1) == 1);
-		cycleStageCache = pair;
-		return pair;
+		//currentCycleStageAsPair = new Pair<>(intervalIndex >> 1, (intervalIndex & 1) == 1);
+		currentConversionIndex = intervalIndex >> 1;
+		isConversionInProgress = (intervalIndex & 1) == 1;
+
 	}
 
 	public TurnsInto getStableBlock(float season) {
-		getCycleStage(season);
-		if (cycleStageCache.getRight()) { //if conversion is in progress
-			return conversions[cycleStageCache.getLeft()].turnsInto();
+		//updateCycleStage(season);
+		if (isConversionInProgress) { //if conversion is in progress
+			return conversions[currentConversionIndex].turnsInto();
 		} else {
-			return previousConversion(cycleStageCache.getLeft()).turnsInto();
+			return previousConversion(currentConversionIndex).turnsInto();
 		}
 	}
 
 	public TurnsInto getPreviouslyStableBlock(float season) {
-		getCycleStage(season);
-		return previousConversion(cycleStageCache.getLeft()).turnsInto();
+		//updateCycleStage(season);
+		return previousConversion(currentConversionIndex).turnsInto();
 	}
 
-	public float getConversionProgress(float season) {
-		getCycleStage(season);
-		float elapsedFromBeginning = season - beginningIntervalCache;
+	public float getConversionRemainingProgress(float season) {
+		//getCycleStage(season);
+		float elapsedFromBeginning = season - currentIntervalBeginning;
 		if (elapsedFromBeginning < 0) elapsedFromBeginning += 1f;
-		float remaining = endIntervalCache - season;
+		float remaining = currentIntervalEnd - season;
 		if (remaining < 0) remaining += 1f;
-		return elapsedFromBeginning / (elapsedFromBeginning + remaining);
+		return remaining / (elapsedFromBeginning + remaining);
+	}
+
+	public int getConversionRemainingTicks(float season) {
+		//updateCycleStage(season);
+		//float elapsedFromBeginning = season - currentIntervalBeginning;
+		//if (elapsedFromBeginning < 0) elapsedFromBeginning += 1f;
+		float remaining = currentIntervalEnd - season;
+		if (remaining < 0) remaining += 1f;
+		return (int)(remaining * (double)DynamicSeasons.YEAR_DURATION);
 	}
 
 

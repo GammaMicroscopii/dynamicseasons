@@ -3,6 +3,8 @@ package com.gammamicroscopii.world;
 import com.gammamicroscopii.DynamicSeasons;
 import com.gammamicroscopii.mixed.ServerWorldMixed;
 import com.gammamicroscopii.network.DSNetworking;
+import com.gammamicroscopii.resourceload.data.SeasonalBlockCycle;
+import com.gammamicroscopii.resourceload.data.SeasonalBlockCycles;
 import net.minecraft.server.world.ServerWorld;
 
 public class SeasonHelper {
@@ -30,6 +32,9 @@ public class SeasonHelper {
 
 		}
 		swm.setRenderReloadCountdown(swm.getRenderReloadCountdown() - 1);
+		for (SeasonalBlockCycle cycle : SeasonalBlockCycles.getSeasonalBlockCycleMap().values()) {
+			cycle.updateCycleStage(swm.getSeasonInfo().getSeason());
+		}
 	}
 
 	public static float getCurrentSeason() {

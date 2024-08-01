@@ -25,6 +25,9 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 	private static final HashMap<String, BooleanProperty> BOOLEAN_PROPERTIES = new HashMap<>();
 	//private static final HashMap<String, EnumProperty> ENUM_PROPERTIES = new HashMap<>();
 
+	private static final HashMap<BlockState, Boolean> IS_BLOCKSTATE_AFFECTED_CACHE = new HashMap<>();
+	private static final HashMap<BlockState, BlockState> NEXT_BLOCKSTATE_CACHE = new HashMap<>();
+
 	static {
 		INT_PROPERTIES.put("distance", Properties.DISTANCE_1_7);
 		BOOLEAN_PROPERTIES.put("waterlogged", Properties.WATERLOGGED);
@@ -55,8 +58,10 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 		return BLOCKS_IN_SEASONAL_CYCLES.get(blockId);
 	}
 
-	//TODO: CACHE THIS HashMap<BlockState, Boolean>
 	public static boolean isBlockStateAffected(BlockState state, Identifier blockId) {
+		Boolean cacheValue = IS_BLOCKSTATE_AFFECTED_CACHE.get(state);
+		if (cacheValue != null) return cacheValue;
+
 		//The blockID could actually correspond to ANY season interval!
 		Pair<SeasonalBlockCycle, Integer> pair = getBlockSeasonalCycle(blockId);
 		SeasonalBlockCycle.PreviousBlockBlockState[] blockPropertiesFromJson = pair.getLeft().nextConversion(pair.getRight()).previousBlockBlockStates();
@@ -79,14 +84,18 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 		}
 		/*TurnsInto previousId = pair.getLeft().getPreviouslyStableBlock(season);
 		TurnsInto stableBlockId = pair.getLeft().getStableBlock(season);*/
+
+		IS_BLOCKSTATE_AFFECTED_CACHE.put(state, b);
 		return b;
 	}
-
-	//TODO: CACHE THIS HashMap<BlockState, BlockState>
 
 	//blockId is the ID of state's block
 	@SuppressWarnings("unchecked")
 	public static BlockState nextBlockState(BlockState state, Identifier blockId, DynamicRegistryManager registryManager) {
+		BlockState cacheValue = NEXT_BLOCKSTATE_CACHE.get(state);
+		if (cacheValue != null) return cacheValue;
+
+
 		Pair<SeasonalBlockCycle, Integer> pair = getBlockSeasonalCycle(blockId);
 		//TurnsInto is a class of mine, which comes from Json parsing, and holds the block ID and, optionally, its states as Strings,
 		//of the blockstate that should replace state at its position
@@ -140,6 +149,8 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 				newState = state.contains(property) ? newState.with(property, state.get(property)) : newState;
 			}
 		}
+
+		NEXT_BLOCKSTATE_CACHE.put(state, newState);
 		return newState;
 	}
 

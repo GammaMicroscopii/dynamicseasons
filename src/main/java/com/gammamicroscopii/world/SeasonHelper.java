@@ -53,4 +53,19 @@ public class SeasonHelper {
 		double years = time / (double) DynamicSeasons.YEAR_DURATION;
 		return (float)(years - (int) years);
 	}
+
+	public static boolean isMiddleBetweenExtremes(float startSeason, float currentSeason, float endSeason) {
+		if (hasReachedNewYear(startSeason, endSeason)) {
+			return currentSeason > startSeason || currentSeason < endSeason;
+		} else {
+			return currentSeason > startSeason && currentSeason < endSeason;
+		}
+	}
+
+	/**
+	 * Both earlierSeason and laterSeason are assumed as truly being earlier and later, respectively
+	 */
+	public static boolean hasReachedNewYear(float earlierSeason, float laterSeason) {
+		return laterSeason < earlierSeason;
+	}
 }

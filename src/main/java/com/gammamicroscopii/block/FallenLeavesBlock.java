@@ -1,29 +1,26 @@
 package com.gammamicroscopii.block;
 
-import com.mojang.serialization.MapCodec;
+import com.gammamicroscopii.world.SeasonHelper;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.LightType;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-public class FallenLeavesBlock extends Block implements Waterloggable{
+public class FallenLeavesBlock extends Block implements Waterloggable, SeasonallyDisappearingSoilBlock{
 
 	public static final int MAX_LAYERS = 17;
 	public static final IntProperty HEIGHT = IntProperty.of("height", 1, MAX_LAYERS);
@@ -64,20 +61,15 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 
 
 	protected boolean canPathfindThrough(BlockState state, NavigationType type) {
-		switch (type) {
-			case LAND:
-				return (Integer)state.get(HEIGHT) < 10;
-			case WATER:
-				return false;
-			case AIR:
-				return false;
-			default:
-				return false;
-		}
+		return switch (type) {
+			case LAND -> state.get(HEIGHT) < 10;
+			case WATER -> false;
+			case AIR -> false;
+		};
 	}
 
 	protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return LAYERS_TO_SHAPE[(Integer)state.get(HEIGHT) - 1];
+		return LAYERS_TO_SHAPE[state.get(HEIGHT) - 1];
 	}
 
 	protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -86,11 +78,11 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 	}
 
 	protected VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
-		return LAYERS_TO_SHAPE[(Integer)state.get(HEIGHT) - 1];
+		return LAYERS_TO_SHAPE[state.get(HEIGHT) - 1];
 	}
 
 	protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return LAYERS_TO_SHAPE[(Integer)state.get(HEIGHT) - 1];
+		return LAYERS_TO_SHAPE[state.get(HEIGHT) - 1];
 	}
 
 	protected boolean hasSidedTransparency(BlockState state) {
@@ -98,12 +90,12 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 	}
 
 	protected float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-		return (Integer)state.get(HEIGHT) == MAX_LAYERS ? 0.2F : 1.0F;
+		return state.get(HEIGHT) == MAX_LAYERS ? 0.2F : 1.0F;
 	}
 
 	protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockState blockState = world.getBlockState(pos.down());
-		return Block.isFaceFullSquare(blockState.getCollisionShape(world, pos.down()), Direction.UP) || blockState.isOf(this) && (Integer)blockState.get(HEIGHT) == MAX_LAYERS;
+		return Block.isFaceFullSquare(blockState.getCollisionShape(world, pos.down()), Direction.UP) || blockState.isOf(this) && blockState.get(HEIGHT) == MAX_LAYERS;
 	}
 
 	protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -119,7 +111,7 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 	}
 
 	protected boolean canReplace(BlockState state, ItemPlacementContext context) {
-		int i = (Integer)state.get(HEIGHT);
+		int i = state.get(HEIGHT);
 		if (context.getStack().isOf(this.asItem()) && i < MAX_LAYERS) {
 			if (context.canReplaceExisting()) {
 				return context.getSide() == Direction.UP;
@@ -135,9 +127,9 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
 		if (blockState.isOf(this)) {
-			int i = (Integer)blockState.get(HEIGHT);
+			int i = blockState.get(HEIGHT);
 			boolean w = blockState.get(Properties.WATERLOGGED);
-			return (BlockState)blockState.with(HEIGHT, Math.min(MAX_LAYERS, i + 1)).with(Properties.WATERLOGGED, i < MAX_LAYERS-1 ? w : false);
+			return blockState.with(HEIGHT, Math.min(MAX_LAYERS, i + 1)).with(Properties.WATERLOGGED, i < MAX_LAYERS - 1 && w);
 		} else {
 			return this.getDefaultState().with(Properties.WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER));
 		}
@@ -148,6 +140,17 @@ public class FallenLeavesBlock extends Block implements Waterloggable{
 		return state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
 	}
 
+	@Override
+	public void onSeasonalTick(ServerWorld world, BlockState blockState, BlockPos pos, java.util.Random random, float startSeason, float currentSeason, float endSeason) {
+		if (SeasonHelper.isMiddleBetweenExtremes(startSeason, currentSeason, endSeason) && world.getBlockState(pos.down()).isIn(ModBlocks.Tags.ORGANIC_SOIL)) {
+			int height = blockState.get(HEIGHT);
+			if (height < 2) {
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
+			} else {
+				world.setBlockState(pos, blockState.with(HEIGHT, height - 2), Block.NOTIFY_LISTENERS);
+			}
+		}
+	}
 
 
 }

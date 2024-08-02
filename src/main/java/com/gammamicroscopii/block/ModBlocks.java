@@ -2,19 +2,18 @@ package com.gammamicroscopii.block;
 
 import com.gammamicroscopii.DynamicSeasons;
 import com.gammamicroscopii.sounds.ModSounds;
-import net.fabricmc.fabric.api.block.v1.FabricBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -82,9 +81,15 @@ public class ModBlocks {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(FALLEN_LEAVES));
 	}
 
+	public static class Tags {
+		private Tags() {}
+
+		public static final TagKey<Block> ORGANIC_SOIL = TagKey.of(RegistryKeys.BLOCK, new Identifier(DynamicSeasons.MOD_ID, "organic_soil"));
+	}
+
 	public static class Items {
 
-		private Items() {};
+		private Items() {}
 
 		public static final Item DISCOLORED_BIRCH_LEAVES = registerBlockItem("discolored_birch_leaves", ModBlocks.DISCOLORED_BIRCH_LEAVES);
 		public static final Item DISCOLORED_CHERRY_LEAVES = registerBlockItem("discolored_cherry_leaves", ModBlocks.DISCOLORED_CHERRY_LEAVES);

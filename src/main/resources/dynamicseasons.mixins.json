@@ -9,7 +9,8 @@
 		"GrassColorsMixin",
 		"ServerWorldMixin",
 		"TimeCommandMixin",
-		"ServerChunkManagerMixin"
+		"ServerChunkManagerMixin",
+		"FlowerbedBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

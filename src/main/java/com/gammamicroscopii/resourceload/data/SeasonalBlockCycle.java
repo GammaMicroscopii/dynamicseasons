@@ -1,11 +1,11 @@
 package com.gammamicroscopii.resourceload.data;
 
 import com.gammamicroscopii.DynamicSeasons;
+import com.gammamicroscopii.world.SeasonHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import net.minecraft.util.Pair;
 
 import java.util.List;
 
@@ -39,19 +39,19 @@ public class SeasonalBlockCycle {
 
 	public void updateCycleStage(float season) {
 		//if (!(currentIntervalBeginning == null || currentIntervalEnd == null || currentConversionIndex == null || isConversionInProgress == null)) {
-			if (hasJustWrappedAround(currentIntervalBeginning, currentIntervalEnd)) {
+			if (SeasonHelper.hasReachedNewYear(currentIntervalBeginning, currentIntervalEnd)) {
 				if (season > currentIntervalBeginning || season < currentIntervalEnd) return;
 			} else {
 				if (season > currentIntervalBeginning && season < currentIntervalEnd) return;
 			}
 		//}
 
-		int intervalIndex = 0;
+		int intervalIndex;
 
 		int i = 0;
 		while (true) {
 
-			if (hasJustWrappedAround(previousInterval(i), intervalChangeSeasons[i])) {
+			if (SeasonHelper.hasReachedNewYear(previousInterval(i), intervalChangeSeasons[i])) {
 				if (season > previousInterval(i) || season < intervalChangeSeasons[i]) {
 					intervalIndex = i;
 					break;
@@ -108,10 +108,6 @@ public class SeasonalBlockCycle {
 		return (int)(remaining * (double)DynamicSeasons.YEAR_DURATION);
 	}
 
-
-	private boolean hasJustWrappedAround(float lower, float higher) {
-		return higher < lower;
-	}
 
 	public float previousInterval(int i) {
 		if (i == 0) {

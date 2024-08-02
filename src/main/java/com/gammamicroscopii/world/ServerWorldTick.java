@@ -1,8 +1,10 @@
 package com.gammamicroscopii.world;
 
+import com.gammamicroscopii.block.SeasonallyDisappearingSoilBlock;
 import com.gammamicroscopii.mixed.ServerWorldMixed;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycle;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycles;
+import com.gammamicroscopii.resourceload.data.SeasonallyDisappearingSoilBlocksJson;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.block.*;
@@ -74,13 +76,13 @@ public class ServerWorldTick {
 		int cumulativeSolidness = 0;
 		BlockState temp;
 		int bottomY = world.getBottomY();
-		while (cumulativeSolidness < 15 && mutable.getY() > bottomY) {
+		while (cumulativeSolidness < 16 && mutable.getY() > bottomY) {
 			temp = world.getBlockState(mutable);
 
 			if (temp.getBlock() instanceof LeavesBlock) {
 
 			} else if (temp.isIn(BlockTags.OVERWORLD_NATURAL_LOGS)) {
-				cumulativeSolidness+= 4;
+				cumulativeSolidness+= 2;
 			} else if (temp.getBlock() instanceof MushroomBlock) {
 				cumulativeSolidness+= 2;
 			} else if (temp.isSolidBlock(world, mutable)) {
@@ -96,7 +98,9 @@ public class ServerWorldTick {
 		mutable.setY(topPos);
 
 		//HashMap<BlockState, SeasonalBlockCycle> blockStateSeasonalRuleHashMap = null;
-
+		BlockState blockState;
+		Block block;
+		Identifier id;
 		while (mutable.getY() >= bottomPos) {
 
 			if (random.nextInt(SEASONAL_TICK_SKIP_BLOCK_CHANCE) > 99) {
@@ -104,9 +108,9 @@ public class ServerWorldTick {
 				continue;
 			}
 
-			BlockState blockState = world.getBlockState(mutable);
-			Block block = blockState.getBlock();
-			Identifier id = world.getRegistryManager().get(RegistryKeys.BLOCK).getId(block);
+			blockState = world.getBlockState(mutable);
+			block = blockState.getBlock();
+			id = world.getRegistryManager().get(RegistryKeys.BLOCK).getId(block);
 
 
 			if (!(blockState.isAir() || blockState.isOf(Blocks.WATER) || blockState.isOf(Blocks.LAVA))) {
@@ -116,6 +120,13 @@ public class ServerWorldTick {
 					//	blockStateSeasonalRuleHashMap = new HashMap<BlockState, SeasonalBlockCycle>();
 
 					checkSeasonalUpdate(world, mutable.toImmutable(), blockState, block, id, pair.getLeft(), ((ServerWorldMixed)world).getSeasonInfo().getSeason()/*, blockStateSeasonalRuleHashMap*/);
+				} else {
+					Pair<Float, Float> pair2 = SeasonallyDisappearingSoilBlocksJson.getSeasonPair(id);
+					if (pair2 != null) {
+						if (block instanceof SeasonallyDisappearingSoilBlock sdsb) {
+							sdsb.onSeasonalTick(world, blockState, mutable.toImmutable(), random, pair2.getLeft(), ((ServerWorldMixed)world).getSeasonInfo().getSeason(), pair2.getRight());
+						}
+					}
 				}
 			}
 
@@ -141,10 +152,10 @@ public class ServerWorldTick {
 					float square = remainingConversionProgress * remainingConversionProgress;
 					float inverseRate = 3f * square * square;
 					if (random.nextFloat() * inverseRate < CHANCE_OF_SEASONAL_UPDATE_PER_TICK_FOR_ANY_BLOCK / (remainingConversionTicks+1)) {
-						world.setBlockState(pos, SeasonalBlockCycles.nextBlockState(blockState, id, world.getRegistryManager()));
+						world.setBlockState(pos, SeasonalBlockCycles.nextBlockState(blockState, id, world.getRegistryManager()), Block.NOTIFY_LISTENERS);
 					}
 				} else {
-					world.setBlockState(pos, SeasonalBlockCycles.nextBlockState(blockState, id, world.getRegistryManager()));
+					world.setBlockState(pos, SeasonalBlockCycles.nextBlockState(blockState, id, world.getRegistryManager()), Block.NOTIFY_LISTENERS);
 				}
 			}
 		}

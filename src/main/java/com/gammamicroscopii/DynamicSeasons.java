@@ -1,24 +1,20 @@
 package com.gammamicroscopii;
 
 import com.gammamicroscopii.block.ModBlocks;
-import com.gammamicroscopii.colors.DSColorHelper;
 import com.gammamicroscopii.item.ModItems;
 import com.gammamicroscopii.network.DSNetworking;
 import com.gammamicroscopii.particle.ModParticles;
 import com.gammamicroscopii.resourceload.data.BiomeClimates;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycles;
+import com.gammamicroscopii.resourceload.data.SeasonallyDisappearingSoilBlocksJson;
 import com.gammamicroscopii.sounds.ModSounds;
 import com.gammamicroscopii.world.ServerWorldTick;
-import com.sun.jna.platform.win32.Winsvc;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.world.biome.BiomeEffects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.awt.*;
 
 public class DynamicSeasons implements ModInitializer {
 
@@ -31,6 +27,7 @@ public class DynamicSeasons implements ModInitializer {
 	public void onInitialize() {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new BiomeClimates());
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SeasonalBlockCycles());
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SeasonallyDisappearingSoilBlocksJson());
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();

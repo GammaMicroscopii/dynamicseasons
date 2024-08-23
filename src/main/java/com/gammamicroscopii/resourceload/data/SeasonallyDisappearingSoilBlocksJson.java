@@ -18,12 +18,17 @@ import java.util.List;
 public class SeasonallyDisappearingSoilBlocksJson implements SimpleSynchronousResourceReloadListener {
 
 	private static final HashMap<Identifier, Pair<Float, Float>> SEASONALLY_DISAPPEARING_SOIL_BLOCKS = new HashMap<>();
+	private static final HashMap<Identifier, Identifier> WHICH_BLOCKS_PLACE_WHICH_SOIL_BLOCKS = new HashMap<>();
 
 	/**
 	 * @return LEFT = start of vanishing season; RIGHT = end of vanishing season
 	 */
-	public static Pair<Float, Float> getSeasonPair(Identifier blockId) {
+	public static Pair<Float, Float> getVanishingSeasonBounds(Identifier blockId) {
 		return SEASONALLY_DISAPPEARING_SOIL_BLOCKS.get(blockId);
+	}
+
+	public static Identifier getSoilBlockPlacedByBlock(Identifier block) {
+		return WHICH_BLOCKS_PLACE_WHICH_SOIL_BLOCKS.get(block);
 	}
 
 	@Override
@@ -34,6 +39,7 @@ public class SeasonallyDisappearingSoilBlocksJson implements SimpleSynchronousRe
 	@Override
 	public void reload(ResourceManager manager) {
 		SEASONALLY_DISAPPEARING_SOIL_BLOCKS.clear();
+		WHICH_BLOCKS_PLACE_WHICH_SOIL_BLOCKS.clear();
 		try {
 			Resource resource = manager.getResourceOrThrow(new Identifier("seasonally_disappearing_soil_blocks.json"));
 
@@ -64,7 +70,7 @@ public class SeasonallyDisappearingSoilBlocksJson implements SimpleSynchronousRe
 	}
 
 
-	public record SeasonallyDisappearingSoilBlockJson(String id, float startingSeason, float endSeason) {
+	public record SeasonallyDisappearingSoilBlockJson(String id, float startingSeason, float endSeason, BlockStateFilterer[] filterers) {
 
 		static SeasonallyDisappearingSoilBlockJson[] fromJson(JsonElement jsEl) {
 
@@ -73,11 +79,23 @@ public class SeasonallyDisappearingSoilBlocksJson implements SimpleSynchronousRe
 			SeasonallyDisappearingSoilBlockJson[] finalArray = new SeasonallyDisappearingSoilBlockJson[sdsbs.size()];
 			int i = 0;
 			JsonObject jsOb;
+			String blockId;
 			for (JsonElement sdsb : sdsbs) {
 				jsOb = sdsb.getAsJsonObject();
-				finalArray[i++] = new SeasonallyDisappearingSoilBlockJson(jsOb.get("block").getAsString(), jsOb.get("start_season").getAsFloat(), jsOb.get("end_season").getAsFloat());
+				blockId = jsOb.get("block").getAsString();
+				finalArray[i] = new SeasonallyDisappearingSoilBlockJson(blockId, jsOb.get("start_season").getAsFloat(), jsOb.get("end_season").getAsFloat(), parseFilterers(jsOb.get("placed_by").getAsJsonArray().asList(), new Identifier(blockId)));
+				i++;
 			}
 			return finalArray;
+		}
+
+		private static BlockStateFilterer[] parseFilterers(List<JsonElement> placed_by, Identifier blockId) {
+			BlockStateFilterer[] bsfs = new BlockStateFilterer[placed_by.size()];
+			for (int i = 0; i < placed_by.size(); i++) {
+				bsfs[i] = BlockStateFilterer.fromJson(placed_by.get(i));
+				WHICH_BLOCKS_PLACE_WHICH_SOIL_BLOCKS.put(new Identifier(bsfs[i].id), blockId);
+			}
+			return bsfs;
 		}
 
 	}

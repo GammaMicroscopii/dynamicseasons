@@ -723,5 +723,301 @@
         "weight": 1
       }
     ]
+  },
+  "deflowering_cherry_leaves_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break4",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "deflowering_cherry_leaves_fall": {
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_fall",
+        "pitch": 0.75,
+        "volume": 0.5,
+        "weight": 1
+      }
+    ]
+  },
+  "deflowering_cherry_leaves_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "deflowering_cherry_leaves_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_break4",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "deflowering_cherry_leaves_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step1",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step2",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step3",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/deflowering_cherry_leaves_step4",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      }
+    ]
+  },
+
+
+  "snowy_grass_break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/snowy_grass_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break4",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "snowy_grass_fall": {
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/snowy_grass_break1",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break2",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break3",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break4",
+        "pitch": 0.45,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "snowy_grass_hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/snowy_grass_step1",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step2",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step3",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step4",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step5",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step6",
+        "pitch": 0.5,
+        "volume": 0.25,
+        "weight": 1
+      }
+    ]
+  },
+  "snowy_grass_place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/snowy_grass_break1",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break2",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break3",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_break4",
+        "pitch": 0.8,
+        "volume": 1.0,
+        "weight": 1
+      }
+    ]
+  },
+  "snowy_grass_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "dynamicseasons:block/snowy_grass_step1",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step2",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step3",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step4",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step5",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      },
+      {
+        "name": "dynamicseasons:block/snowy_grass_step6",
+        "pitch": 1.0,
+        "volume": 0.15,
+        "weight": 1
+      }
+    ]
   }
 }

@@ -206,4 +206,15 @@ public class BiomeMixin implements BiomeMixed {
 	public BiomeClimateParameters getClimateParameters() {
 		return this.climateParameters;
 	}*/
+
+	@ModifyConstant(method = "canSetIce(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;Z)Z", constant = @Constant(intValue = 10))
+	private int injected60(int value) {
+		return 16;
+	}
+
+	@ModifyConstant(method = "canSetSnow", constant = @Constant(intValue = 10))
+	private int injected61(int value) {
+		return 16;
+	}
+
 }

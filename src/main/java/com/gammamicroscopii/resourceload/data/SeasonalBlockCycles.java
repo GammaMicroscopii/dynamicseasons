@@ -17,7 +17,6 @@ import net.minecraft.util.Pair;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.function.Supplier;
 
 public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListener {
 
@@ -59,13 +58,13 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 	}
 
 	public static boolean isBlockStateAffected(BlockState state, Identifier blockId) {
-		Boolean cacheValue = IS_BLOCKSTATE_AFFECTED_CACHE.get(state);
+/*		Boolean cacheValue = IS_BLOCKSTATE_AFFECTED_CACHE.get(state);
 		if (cacheValue != null) return cacheValue;
 
-		//The blockID could actually correspond to ANY season interval!
+*/	//The blockID could actually correspond to ANY season interval!
 		Pair<SeasonalBlockCycle, Integer> pair = getBlockSeasonalCycle(blockId);
-		SeasonalBlockCycle.PreviousBlockBlockState[] blockPropertiesFromJson = pair.getLeft().nextConversion(pair.getRight()).previousBlockBlockStates();
-		boolean b = true;
+		return pair.getLeft().conversions()[pair.getRight()].blockStateFilterer().filterBlockState(state, blockId.toString());
+/*	boolean b = true;
 		List<Property<?>> blockProperties = state.getProperties().stream().toList();
 		//Property<?>[] properties = new Property<?>[blockProperties.size()];
 		//int i = 0;
@@ -83,11 +82,11 @@ public class SeasonalBlockCycles implements SimpleSynchronousResourceReloadListe
 			}
 		}
 		/*TurnsInto previousId = pair.getLeft().getPreviouslyStableBlock(season);
-		TurnsInto stableBlockId = pair.getLeft().getStableBlock(season);*/
-
+*///		TurnsInto stableBlockId = pair.getLeft().getStableBlock(season);*/
+/*
 		IS_BLOCKSTATE_AFFECTED_CACHE.put(state, b);
 		return b;
-	}
+*/}
 
 	//blockId is the ID of state's block
 	@SuppressWarnings("unchecked")

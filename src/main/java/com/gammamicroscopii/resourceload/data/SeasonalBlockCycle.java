@@ -5,15 +5,17 @@ import com.gammamicroscopii.world.SeasonHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import java.util.List;
+
+import static com.gammamicroscopii.resourceload.data.BlockStateFilterer.jsonElementToBlockstateValue;
+import static com.gammamicroscopii.resourceload.data.BlockStateFilterer.parseProperties;
 
 public class SeasonalBlockCycle {
 
 	final Conversion[] conversions;
-	final float[] intervalChangeSeasons;
-	final String[] blockIds;
+	final Float[] intervalChangeSeasons;
+	//final String[] blockIds;
 	float currentIntervalBeginning;
 	float currentIntervalEnd;
 	//Pair<Integer, Boolean> currentCycleStageAsPair = null;
@@ -22,15 +24,15 @@ public class SeasonalBlockCycle {
 
 	SeasonalBlockCycle(Conversion[] conversions) {
 		this.conversions = conversions;
-		this.intervalChangeSeasons = new float[conversions.length * 2];
+		this.intervalChangeSeasons = new Float[conversions.length * 2];
 		for (int i = 0; i < conversions.length; i++) {
 			intervalChangeSeasons[i << 1] = conversions[i].startSeason();
 			intervalChangeSeasons[i << 1 | 1] = conversions[i].endSeason();
 		}
-		this.blockIds = new String[conversions.length];
+		/*this.blockIds = new String[conversions.length];
 		for (int i = 0; i < conversions.length; i++) {
 			blockIds[i] = conversions[i].turnsInto().toString();
-		}
+		}*/
 	}
 
 	public Conversion[] conversions() {
@@ -40,24 +42,25 @@ public class SeasonalBlockCycle {
 	public void updateCycleStage(float season) {
 		//if (!(currentIntervalBeginning == null || currentIntervalEnd == null || currentConversionIndex == null || isConversionInProgress == null)) {
 			if (SeasonHelper.hasReachedNewYear(currentIntervalBeginning, currentIntervalEnd)) {
-				if (season > currentIntervalBeginning || season < currentIntervalEnd) return;
+				if (season > currentIntervalBeginning - 1E-7f || season < currentIntervalEnd) return;
 			} else {
-				if (season > currentIntervalBeginning && season < currentIntervalEnd) return;
+				if (season > currentIntervalBeginning - 1E-7f && season < currentIntervalEnd) return;
 			}
 		//}
 
 		int intervalIndex;
 
 		int i = 0;
+		Float previousIntervalOfI;
 		while (true) {
-
-			if (SeasonHelper.hasReachedNewYear(previousInterval(i), intervalChangeSeasons[i])) {
-				if (season > previousInterval(i) || season < intervalChangeSeasons[i]) {
+			previousIntervalOfI = previousElement(i, intervalChangeSeasons) - 1E-7f;
+			if (SeasonHelper.hasReachedNewYear(previousIntervalOfI, intervalChangeSeasons[i])) {
+				if (season > previousIntervalOfI || season < intervalChangeSeasons[i]) {
 					intervalIndex = i;
 					break;
 				}
 			} else {
-				if (season > previousInterval(i) && season < intervalChangeSeasons[i]) {
+				if (season > previousIntervalOfI && season < intervalChangeSeasons[i]) {
 					intervalIndex = i;
 					break;
 				}
@@ -67,7 +70,7 @@ public class SeasonalBlockCycle {
 			if (i >= intervalChangeSeasons.length) i -= intervalChangeSeasons.length;
 		}
 
-		currentIntervalBeginning = previousInterval(intervalIndex);
+		currentIntervalBeginning = previousElement(intervalIndex, intervalChangeSeasons);
 		currentIntervalEnd = intervalChangeSeasons[intervalIndex];
 
 		//currentCycleStageAsPair = new Pair<>(intervalIndex >> 1, (intervalIndex & 1) == 1);
@@ -81,56 +84,43 @@ public class SeasonalBlockCycle {
 		if (isConversionInProgress) { //if conversion is in progress
 			return conversions[currentConversionIndex].turnsInto();
 		} else {
-			return previousConversion(currentConversionIndex).turnsInto();
+			return previousElement(currentConversionIndex, conversions).turnsInto();
 		}
 	}
 
 	public TurnsInto getPreviouslyStableBlock(float season) {
 		//updateCycleStage(season);
-		return previousConversion(currentConversionIndex).turnsInto();
+		return previousElement(currentConversionIndex, conversions).turnsInto();
 	}
 
 	public float getConversionRemainingProgress(float season) {
 		//getCycleStage(season);
-		float elapsedFromBeginning = season - currentIntervalBeginning;
-		if (elapsedFromBeginning < 0) elapsedFromBeginning += 1f;
-		float remaining = currentIntervalEnd - season;
-		if (remaining < 0) remaining += 1f;
-		return remaining / (elapsedFromBeginning + remaining);
+		return SeasonHelper.getRemainingIntervalProgress(currentIntervalBeginning, season, currentIntervalEnd);
 	}
 
-	public int getConversionRemainingTicks(float season) {
+	public float getConversionLengthInYearFraction() {
 		//updateCycleStage(season);
 		//float elapsedFromBeginning = season - currentIntervalBeginning;
 		//if (elapsedFromBeginning < 0) elapsedFromBeginning += 1f;
-		float remaining = currentIntervalEnd - season;
-		if (remaining < 0) remaining += 1f;
-		return (int)(remaining * (double)DynamicSeasons.YEAR_DURATION);
+		float fract = currentIntervalEnd - currentIntervalBeginning;
+		if (fract < 0) fract += 1f;
+		return fract;
 	}
 
-
-	public float previousInterval(int i) {
-		if (i == 0) {
-			return intervalChangeSeasons[intervalChangeSeasons.length - 1];
-		} else {
-			return intervalChangeSeasons[i - 1];
-		}
+	public static int previousArrayIndex(int index, Object[] array) {
+		return index == 0 ? array.length - 1 : index - 1;
 	}
 
-	public Conversion previousConversion(int i) {
-		return conversions[previousConversionIndex(i)];
+	public static int nextArrayIndex(int index, Object[] array) {
+		return index == array.length - 1 ? 0 : index + 1;
 	}
 
-	public int previousConversionIndex(int i) {
-		return i == 0 ? conversions.length - 1 : i - 1;
+	public static <T> T previousElement(int index, T[] array) {
+		return array[previousArrayIndex(index, array)];
 	}
 
-	public Conversion nextConversion(int i) {
-		return conversions[nextConversionIndex(i)];
-	}
-
-	public int nextConversionIndex(int i) {
-		return i == conversions.length - 1 ? 0 : i + 1;
+	public static <T> T nextElement(int index, T[] array) {
+		return array[nextArrayIndex(index, array)];
 	}
 
 	public static SeasonalBlockCycle fromJson(JsonElement json) {
@@ -148,40 +138,29 @@ public class SeasonalBlockCycle {
 		for (int i = 0; i < conversionsJson.size(); i++) {
 			conversions[i] = parseConversion(conversionsJson.get(i));
 		}
+		adjustFiltererIds(conversions);
 		return conversions;
+	}
+
+	private static void adjustFiltererIds(Conversion[] conversions) {
+		for (int i = 0; i < conversions.length; i++) {
+			conversions[i].blockStateFilterer.id = previousElement(i, conversions).turnsInto.id;
+		}
 	}
 
 	private static Conversion parseConversion(JsonElement jsonElement) {
 		JsonObject jsOb = jsonElement.getAsJsonObject();
 		JsonElement previousBlockBlockstates = jsOb.get("previous_block_blockstates");
+		TurnsInto turnsInto = parseTurnsInto(jsOb.get("turns_into"));
 		return new Conversion(
-				(previousBlockBlockstates == null ? new PreviousBlockBlockState[0] : parsePreviousBlockBlockstates(previousBlockBlockstates.getAsJsonArray().asList())),
-				parseTurnsInto(jsOb.get("turns_into")),
+				new BlockStateFilterer(turnsInto.id(), previousBlockBlockstates == null ? new com.gammamicroscopii.resourceload.data.PropertyValue[0] : parseProperties(previousBlockBlockstates.getAsJsonArray().asList())),
+				turnsInto,
 				jsOb.get("start_season").getAsFloat(),
 				jsOb.get("end_season").getAsFloat()
 		);
 	}
 
-	private static PreviousBlockBlockState[] parsePreviousBlockBlockstates(List<JsonElement> PBBSJson) {
-		PreviousBlockBlockState[] PBBSs = new PreviousBlockBlockState[PBBSJson.size()];
-		for (int i = 0; i < PBBSJson.size(); i++) {
-			PBBSs[i] = parsePreviousBlockBlockstate(PBBSJson.get(i));
-		}
-		return PBBSs;
-	}
 
-	private static PreviousBlockBlockState parsePreviousBlockBlockstate(JsonElement jsonElement) {
-		JsonObject jsOb = jsonElement.getAsJsonObject();
-		return new PreviousBlockBlockState(jsOb.get("property").getAsString(), converttoObjectArray(jsOb.get("affected_values").getAsJsonArray().asList()));
-	}
-
-	private static Object[] converttoObjectArray(List<JsonElement> affected_values) {
-		Object[] finalList = new Object[affected_values.size()];
-		for (int i = 0; i < affected_values.size(); i++) {
-			finalList[i] = jsonElementToBlockstateValue(affected_values.get(i));
-		}
-		return finalList;
-	}
 
 
 	private static TurnsInto parseTurnsInto(JsonElement jsonElement) {
@@ -189,27 +168,24 @@ public class SeasonalBlockCycle {
 		JsonElement blockState = jsOb.get("blockstate");
 		return new TurnsInto(
 				jsOb.get("id").getAsString(),
-				(blockState == null ? new PropertyValue[0] : parsePropertyValuePairs(blockState.getAsJsonArray().asList()))
+				(blockState == null ? new TIPropertyValue[0] : parseTIPropertyValuePairs(blockState.getAsJsonArray().asList()))
 		);
 	}
 
-	private static PropertyValue[] parsePropertyValuePairs(List<JsonElement> propertyValuePairs) {
-		PropertyValue[] finalList = new PropertyValue[propertyValuePairs.size()];
+	private static TIPropertyValue[] parseTIPropertyValuePairs(List<JsonElement> propertyValuePairs) {
+		TIPropertyValue[] finalList = new TIPropertyValue[propertyValuePairs.size()];
 		for (int i = 0; i < propertyValuePairs.size(); i++) {
-			finalList[i] = parsePropertyValuePair(propertyValuePairs.get(i));
+			finalList[i] = parseTIPropertyValuePair(propertyValuePairs.get(i));
 		}
 		return finalList;
 	}
 
-	private static PropertyValue parsePropertyValuePair(JsonElement jsonElement) {
+	private static TIPropertyValue parseTIPropertyValuePair(JsonElement jsonElement) {
 		JsonObject jsOb = jsonElement.getAsJsonObject();
-		return new PropertyValue(jsOb.get("property").getAsString(), jsonElementToBlockstateValue(jsOb.get("value")));
+		return new TIPropertyValue(jsOb.get("property").getAsString(), jsonElementToBlockstateValue(jsOb.get("value")));
 	}
 
-	private static Object jsonElementToBlockstateValue(JsonElement value) {
-		JsonPrimitive primitive = value.getAsJsonPrimitive();
-		return primitive.isBoolean() ? primitive.getAsBoolean() : (primitive.isNumber() ? primitive.getAsInt() : primitive.getAsString());
-	}
+
 
 	/*private static Conversion[] ifNullReturnEmpty(JsonElement jsEl) {
 		return jsEl == null ? Optional.empty() : Optional.of(jsEl.getAsFloat());
@@ -225,7 +201,7 @@ public class SeasonalBlockCycle {
 	}*/
 
 
-	public record Conversion(PreviousBlockBlockState[] previousBlockBlockStates,
+	public record Conversion(BlockStateFilterer blockStateFilterer,
 					  TurnsInto turnsInto,
 					  float startSeason,
 					  float endSeason) {
@@ -238,12 +214,12 @@ public class SeasonalBlockCycle {
 	}
 
 	public record TurnsInto(String id,
-					 PropertyValue[] propertyValues) {
+													TIPropertyValue[] propertyValues) {
 
 	}
 
-	public record PropertyValue(String property,
-						 Object value) {
+	public record TIPropertyValue(String property,
+																Object value) {
 
 	}
 }

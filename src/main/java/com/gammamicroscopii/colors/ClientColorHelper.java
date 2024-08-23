@@ -38,6 +38,7 @@ public class ClientColorHelper {
 		registerSpringOrSummerLeavesColor(ModBlocks.LEAFING_OUT_DARK_OAK_BRANCHES, ModBlocks.Items.LEAFING_OUT_DARK_OAK_BRANCHES, BiomeColors::getFoliageColor, FoliageColors.getDefaultColor());
 		registerSpringOrSummerLeavesColor(ModBlocks.LEAFING_OUT_OAK_BRANCHES, ModBlocks.Items.LEAFING_OUT_OAK_BRANCHES, BiomeColors::getFoliageColor, FoliageColors.getDefaultColor());
 		registerSpringOrSummerLeavesColor(ModBlocks.FLOWERLESS_CHERRY_LEAVES, ModBlocks.Items.FLOWERLESS_CHERRY_LEAVES, BiomeColors::getFoliageColor, FoliageColors.getDefaultColor());
+		registerSpringOrSummerLeavesColor(ModBlocks.DEFLOWERING_CHERRY_LEAVES, ModBlocks.Items.DEFLOWERING_CHERRY_LEAVES, BiomeColors::getFoliageColor, FoliageColors.getDefaultColor(
 		ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? getBirchColor(world, pos) : FoliageColors.getBirchColor(), Blocks.BIRCH_LEAVES);
 		ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? getSpruceColor(world, pos) : FoliageColors.getSpruceColor(), Blocks.SPRUCE_LEAVES);
 	}

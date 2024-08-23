@@ -6,6 +6,7 @@ import com.gammamicroscopii.network.DSNetworking;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycle;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycles;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.MathHelper;
 
 public class SeasonHelper {
 
@@ -67,5 +68,23 @@ public class SeasonHelper {
 	 */
 	public static boolean hasReachedNewYear(float earlierSeason, float laterSeason) {
 		return laterSeason < earlierSeason;
+	}
+
+	public static float getRemainingIntervalProgress(float startSeason, float currentSeason, float endSeason) {
+		float elapsedFromBeginning = currentSeason - startSeason;
+		if (elapsedFromBeginning < 0) elapsedFromBeginning += 1f;
+		float remaining = endSeason - currentSeason;
+		if (remaining < 0) remaining += 1f;
+		return remaining / (elapsedFromBeginning + remaining);
+	}
+
+	public static float advanceSeason(float initialSeason, float lapse) {
+		float r = initialSeason + lapse;
+		return r > 1f ? r - 1 : (r < 0f ? r + 1 : r);
+	}
+
+	public static float calculateInverseRate(float remainingConversionProgress, float conversionLength, float rateMultiplier, float lowerCap) {
+		float square = remainingConversionProgress * remainingConversionProgress;
+		return Math.max(rateMultiplier * square * square * remainingConversionProgress * conversionLength * ServerWorldTick.CHANCE_OF_SEASONAL_UPDATE_PER_TICK_FOR_ANY_BLOCK, lowerCap);
 	}
 }

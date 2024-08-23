@@ -1,5 +1,6 @@
 package com.gammamicroscopii.block;
 
+import com.gammamicroscopii.DynamicSeasons;
 import com.gammamicroscopii.world.SeasonHelper;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -19,6 +20,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
+
+import static com.gammamicroscopii.world.SeasonHelper.advanceSeason;
+import static com.gammamicroscopii.world.SeasonHelper.isMiddleBetweenExtremes;
+import static com.gammamicroscopii.world.SeasonHelper.getRemainingIntervalProgress;
+import static com.gammamicroscopii.world.SeasonHelper.calculateInverseRate;
 
 public class FallenLeavesBlock extends Block implements Waterloggable, SeasonallyDisappearingSoilBlock{
 
@@ -63,8 +69,7 @@ public class FallenLeavesBlock extends Block implements Waterloggable, Seasonall
 	protected boolean canPathfindThrough(BlockState state, NavigationType type) {
 		return switch (type) {
 			case LAND -> state.get(HEIGHT) < 10;
-			case WATER -> false;
-			case AIR -> false;
+			case WATER, AIR -> false;
 		};
 	}
 
@@ -140,16 +145,44 @@ public class FallenLeavesBlock extends Block implements Waterloggable, Seasonall
 		return state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
 	}
 
+
+	public static final int CHANCE_OF_SEASONAL_PLACING_SUCCESS = /*100 over */DynamicSeasons.YEAR_DURATION / 15360;
+
 	@Override
-	public void onSeasonalTick(ServerWorld world, BlockState blockState, BlockPos pos, java.util.Random random, float startSeason, float currentSeason, float endSeason) {
-		if (SeasonHelper.isMiddleBetweenExtremes(startSeason, currentSeason, endSeason) && world.getBlockState(pos.down()).isIn(ModBlocks.Tags.ORGANIC_SOIL)) {
-			int height = blockState.get(HEIGHT);
-			if (height < 2) {
-				world.setBlockState(pos, Blocks.AIR.getDefaultState());
-			} else {
-				world.setBlockState(pos, blockState.with(HEIGHT, height - 2), Block.NOTIFY_LISTENERS);
+	public void onSeasonalTick(ServerWorld world, BlockState blockState, BlockPos pos, Random random, float startSeason, float currentSeason, float endSeason) {
+
+		final float despawningSeasonYearFraction = 0.1625f;
+		final float pseudoEndSeason =  advanceSeason(startSeason, despawningSeasonYearFraction);
+		float remainingProgress = isMiddleBetweenExtremes(startSeason, currentSeason, pseudoEndSeason) ?
+						getRemainingIntervalProgress(startSeason, currentSeason, pseudoEndSeason) : 0f;
+
+		//float square = remainingProgress * remainingProgress;
+		//float calculateInverseRate = 0.00549316406f * square * square * remainingProgress * despawningSeasonYearFraction * CHANCE_OF_SEASONAL_UPDATE_PER_TICK_FOR_ANY_BLOCK;
+
+		if (random.nextFloat() * calculateInverseRate(remainingProgress, despawningSeasonYearFraction, 0.00549316406f, 1.25f) < 1.0f) {
+
+			if (SeasonHelper.isMiddleBetweenExtremes(startSeason, currentSeason, endSeason) && world.getBlockState(pos.down()).isIn(ModBlocks.Tags.ORGANIC_SOIL)) {
+				int height = blockState.get(HEIGHT);
+				int decrease = random.nextInt(3) + 1;
+				if (height <= decrease) {
+					world.setBlockState(pos, Blocks.AIR.getDefaultState());
+				} else {
+					world.setBlockState(pos, blockState.with(HEIGHT, height - decrease), Block.NOTIFY_LISTENERS);
+				}
 			}
 		}
+	}
+
+	@Override
+	public void tryPlaceBlockOfThis(ServerWorld world, BlockPos pos, BlockState state, boolean stateIsAir, Random random) {
+		if (random.nextInt(CHANCE_OF_SEASONAL_PLACING_SUCCESS) > 99) return;
+
+		if (stateIsAir) {
+			world.setBlockState(pos, getDefaultState());
+		} else {
+			world.setBlockState(pos, state.with(HEIGHT, Math.min(MAX_LAYERS, state.get(HEIGHT) + 1)));
+		}
+
 	}
 
 

@@ -5,6 +5,9 @@ public class Temperature {
 
 	public static final Temperature FREEZING = Temperature.of(0f, Unit.CELSIUS);
 	public static final Temperature ABSOLUTE_ZERO = Temperature.of(0f, Unit.KELVIN);
+	public static final Temperature FREEZING_WATER_CHECK_THRESHOLD = Temperature.of(-10f, Unit.CELSIUS);
+	public static final Temperature FASTEST_FREEZING_POSSIBLE = Temperature.of(-30f, Unit.CELSIUS);
+	public static final Temperature MINIMUM_TEMPERATURE_FOR_ICE_SUBLIMATION = Temperature.of(0f, Unit.CELSIUS);
 
 	private final float value; //value stored in Celsius
 

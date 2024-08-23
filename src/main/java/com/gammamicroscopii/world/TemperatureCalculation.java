@@ -17,8 +17,12 @@ public class TemperatureCalculation {
 
 	}
 
-	public static Temperature getThermometerTemperature(BiomeClimate climate) {
+	public static Temperature getGroundTemperature(BiomeClimate climate) {
 		return getBiomeColorTemperature(climate);
+	}
+
+	public static Temperature getThermometerTemperature(BiomeClimate climate) {
+		return getGroundTemperature(climate);
 	}
 
 }

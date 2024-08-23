@@ -46,12 +46,27 @@ public class ModSounds {
 	public static final SoundEvent FALLEN_LEAVES_PLACE = registerSoundEvent("fallen_leaves_place");
 	public static final SoundEvent FALLEN_LEAVES_STEP = registerSoundEvent("fallen_leaves_step");
 
+	public static final SoundEvent DEFLOWERING_CHERRY_LEAVES_BREAK = registerSoundEvent("deflowering_cherry_leaves_break");
+	public static final SoundEvent DEFLOWERING_CHERRY_LEAVES_FALL = registerSoundEvent("deflowering_cherry_leaves_fall");
+	public static final SoundEvent DEFLOWERING_CHERRY_LEAVES_HIT = registerSoundEvent("deflowering_cherry_leaves_hit");
+	public static final SoundEvent DEFLOWERING_CHERRY_LEAVES_PLACE = registerSoundEvent("deflowering_cherry_leaves_place");
+	public static final SoundEvent DEFLOWERING_CHERRY_LEAVES_STEP = registerSoundEvent("deflowering_cherry_leaves_step");
+
+	public static final SoundEvent SNOWY_GRASS_BREAK = registerSoundEvent("snowy_grass_break");
+	public static final SoundEvent SNOWY_GRASS_FALL = registerSoundEvent("snowy_grass_fall");
+	public static final SoundEvent SNOWY_GRASS_HIT = registerSoundEvent("snowy_grass_hit");
+	public static final SoundEvent SNOWY_GRASS_PLACE = registerSoundEvent("snowy_grass_place");
+	public static final SoundEvent SNOWY_GRASS_STEP = registerSoundEvent("snowy_grass_step");
+
 	public static final BlockSoundGroup BRANCHES = new BlockSoundGroup(1f, 1f, BRANCHES_BREAK, BRANCHES_STEP, BRANCHES_PLACE, BRANCHES_HIT, BRANCHES_FALL);
 	public static final BlockSoundGroup LEAFY_BRANCHES = new BlockSoundGroup(1f, 1f, LEAFY_BRANCHES_BREAK, LEAFY_BRANCHES_STEP, LEAFY_BRANCHES_PLACE, LEAFY_BRANCHES_HIT, LEAFY_BRANCHES_FALL);
 	public static final BlockSoundGroup BLOSSOMING_CHERRY_BRANCHES = new BlockSoundGroup(1f, 1f, BLOSSOMING_CHERRY_BRANCHES_BREAK, BLOSSOMING_CHERRY_BRANCHES_STEP, BLOSSOMING_CHERRY_BRANCHES_PLACE, BLOSSOMING_CHERRY_BRANCHES_HIT, BLOSSOMING_CHERRY_BRANCHES_FALL);
 	public static final BlockSoundGroup DEW = new BlockSoundGroup(1f, 1f, DEW_BREAK, SoundEvents.INTENTIONALLY_EMPTY, DEW_PLACE, SoundEvents.INTENTIONALLY_EMPTY, SoundEvents.INTENTIONALLY_EMPTY);
 	public static final BlockSoundGroup FROST = new BlockSoundGroup(1f, 1f, FROST_BREAK, FROST_STEP, FROST_PLACE, FROST_HIT, FROST_FALL);
 	public static final BlockSoundGroup FALLEN_LEAVES = new BlockSoundGroup(1f, 1f, FALLEN_LEAVES_BREAK, FALLEN_LEAVES_STEP, FALLEN_LEAVES_PLACE, FALLEN_LEAVES_HIT, FALLEN_LEAVES_FALL);
+	public static final BlockSoundGroup DEFLOWERING_CHERRY_LEAVES = new BlockSoundGroup(1f, 1f, DEFLOWERING_CHERRY_LEAVES_BREAK, DEFLOWERING_CHERRY_LEAVES_STEP, DEFLOWERING_CHERRY_LEAVES_PLACE, DEFLOWERING_CHERRY_LEAVES_HIT, DEFLOWERING_CHERRY_LEAVES_FALL);
+	public static final BlockSoundGroup SNOWY_GRASS = new BlockSoundGroup(1f, 1f, SNOWY_GRASS_BREAK, SNOWY_GRASS_STEP, SNOWY_GRASS_PLACE, SNOWY_GRASS_HIT, SNOWY_GRASS_FALL);
+
 
 	private static SoundEvent registerSoundEvent(String name) {
 		Identifier id = new Identifier(DynamicSeasons.MOD_ID, name);

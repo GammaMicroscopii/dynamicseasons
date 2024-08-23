@@ -3,12 +3,52 @@
     {
       "block": "minecraft:pink_petals",
       "start_season": 0.108333333333333,
-      "end_season": 0.908333333333333
+      "end_season": 0.908333333333333,
+      "placed_by": [
+        {
+          "id": "minecraft:cherry_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        }
+      ]
     },
     {
       "block": "dynamicseasons:fallen_leaves",
-      "start_season": 0.466666666666667,
-      "end_season": 0.666666666666667
+      "start_season": 0.666666666666667,
+      "end_season": 0.466666666666667,
+      "placed_by": [
+        {
+          "id": "dynamicseasons:unstable_birch_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:unstable_cherry_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:unstable_dark_oak_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:unstable_oak_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:falling_birch_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:falling_cherry_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:falling_dark_oak_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:falling_oak_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        }
+      ]
     }
   ]
 }

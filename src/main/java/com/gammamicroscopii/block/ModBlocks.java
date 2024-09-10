@@ -3,9 +3,7 @@ package com.gammamicroscopii.block;
 import com.gammamicroscopii.DynamicSeasons;
 import com.gammamicroscopii.sounds.ModSounds;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -43,7 +41,25 @@ public class ModBlocks {
 	public static final Block DEW = registerBlock("dew", new DewBlock(AbstractBlock.Settings.create().noCollision().nonOpaque().replaceable().breakInstantly().dropsNothing().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().sounds(ModSounds.DEW)));
 	public static final Block FROST = registerBlock("frost", new CondensationBlock(AbstractBlock.Settings.create().noCollision().nonOpaque().replaceable().breakInstantly().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().sounds(ModSounds.FROST)));
 	public static final Block FALLEN_LEAVES = registerBlock("fallen_leaves", new FallenLeavesBlock(AbstractBlock.Settings.create().nonOpaque().velocityMultiplier(0.9f).strength(0.1f, 0f).sounds(ModSounds.FALLEN_LEAVES)));
-	
+
+	public static final Block DEFLOWERING_CHERRY_LEAVES = registerBlock("deflowering_cherry_leaves", new CherryLeavesBlock(
+					AbstractBlock.Settings.create()
+									.mapColor(MapColor.PINK)
+									.strength(0.2F)
+									.ticksRandomly()
+									.sounds(ModSounds.DEFLOWERING_CHERRY_LEAVES)
+									.nonOpaque()
+									.allowsSpawning(Blocks::canSpawnOnLeaves)
+									.suffocates(Blocks::never)
+									.blockVision(Blocks::never)
+									.burnable()
+									.pistonBehavior(PistonBehavior.DESTROY)
+									.solidBlock(Blocks::never)
+	));
+
+	//public static final Block SNOWY_FALLEN_LEAVES = registerBlock("snowy_fallen_leaves", ????? falta modelo (s));
+
+
 	private static Block registerBlock(String name, Block block) {
 		return Registry.register(Registries.BLOCK, new Identifier(DynamicSeasons.MOD_ID, name), block);
 	}
@@ -79,6 +95,8 @@ public class ModBlocks {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(DEW));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(FROST));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(FALLEN_LEAVES));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(DEFLOWERING_CHERRY_LEAVES));
+		//ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(SNOWY_FALLEN_LEAVES));
 	}
 
 	public static class Tags {
@@ -115,6 +133,8 @@ public class ModBlocks {
 		public static final Item DEW = registerBlockItem("dew", ModBlocks.DEW);
 		public static final Item FROST = registerBlockItem("frost", ModBlocks.FROST);
 		public static final Item FALLEN_LEAVES = registerBlockItem("fallen_leaves", ModBlocks.FALLEN_LEAVES);
+		public static final Item DEFLOWERING_CHERRY_LEAVES = registerBlockItem("deflowering_cherry_leaves", ModBlocks.DEFLOWERING_CHERRY_LEAVES);
+		//public static final Item SNOWY_FALLEN_LEAVES = registerBlockItem("snowy_fallen_leaves", ModBlocks.SNOWY_FALLEN_LEAVES);
 	
 	}
 

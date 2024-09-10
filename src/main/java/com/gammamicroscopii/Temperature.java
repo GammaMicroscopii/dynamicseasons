@@ -47,7 +47,7 @@ public class Temperature {
 		return new Temperature(this.value + increase * unit.unitSize);
 	}
 
-	public static enum Unit {
+	public enum Unit {
 		VANILLA(-3f, 30f, ""),
 		CELSIUS(0f, 1f, " ºC"),
 		FAHRENHEIT(-17.7777778f, 0.55555556f, " ºF"),

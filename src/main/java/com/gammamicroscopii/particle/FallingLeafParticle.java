@@ -64,7 +64,7 @@ public class FallingLeafParticle extends SpriteBillboardParticle {
 
 		this.velocityX +=  -0.0075 + 0.015 * random.nextFloat();
 		this.velocityZ +=  -0.0075 + 0.015 * random.nextFloat();
-		this.velocityY -= (double)this.gravityStrength;
+		this.velocityY -= this.gravityStrength;
 
 
 		if (this.onGround) {

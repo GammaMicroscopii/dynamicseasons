@@ -1,54 +1,57 @@
 {
   "variants": {
     "height=1": {
-      "model": "dynamicseasons:block/fallen_leaves_thin"
+      "model": "dynamicseasons:block/fallen_leaves_thinnest"
     },
     "height=2": {
-      "model": "dynamicseasons:block/fallen_leaves_1"
+      "model": "dynamicseasons:block/fallen_leaves_thin"
     },
     "height=3": {
-      "model": "dynamicseasons:block/fallen_leaves_2"
+      "model": "dynamicseasons:block/fallen_leaves_1"
     },
     "height=4": {
-      "model": "dynamicseasons:block/fallen_leaves_3"
+      "model": "dynamicseasons:block/fallen_leaves_2"
     },
     "height=5": {
-      "model": "dynamicseasons:block/fallen_leaves_4"
+      "model": "dynamicseasons:block/fallen_leaves_3"
     },
     "height=6": {
-      "model": "dynamicseasons:block/fallen_leaves_5"
+      "model": "dynamicseasons:block/fallen_leaves_4"
     },
     "height=7": {
-      "model": "dynamicseasons:block/fallen_leaves_6"
+      "model": "dynamicseasons:block/fallen_leaves_5"
     },
     "height=8": {
-      "model": "dynamicseasons:block/fallen_leaves_7"
+      "model": "dynamicseasons:block/fallen_leaves_6"
     },
     "height=9": {
-      "model": "dynamicseasons:block/fallen_leaves_8"
+      "model": "dynamicseasons:block/fallen_leaves_7"
     },
     "height=10": {
-      "model": "dynamicseasons:block/fallen_leaves_9"
+      "model": "dynamicseasons:block/fallen_leaves_8"
     },
     "height=11": {
-      "model": "dynamicseasons:block/fallen_leaves_10"
+      "model": "dynamicseasons:block/fallen_leaves_9"
     },
     "height=12": {
-      "model": "dynamicseasons:block/fallen_leaves_11"
+      "model": "dynamicseasons:block/fallen_leaves_10"
     },
     "height=13": {
-      "model": "dynamicseasons:block/fallen_leaves_12"
+      "model": "dynamicseasons:block/fallen_leaves_11"
     },
     "height=14": {
-      "model": "dynamicseasons:block/fallen_leaves_13"
+      "model": "dynamicseasons:block/fallen_leaves_12"
     },
     "height=15": {
-      "model": "dynamicseasons:block/fallen_leaves_14"
+      "model": "dynamicseasons:block/fallen_leaves_13"
     },
     "height=16": {
-      "model": "dynamicseasons:block/fallen_leaves_15"
+      "model": "dynamicseasons:block/fallen_leaves_14"
     },
     "height=17": {
+      "model": "dynamicseasons:block/fallen_leaves_15"
+    },
+    "height=18": {
       "model": "dynamicseasons:block/fallen_leaves_full"
     }
 

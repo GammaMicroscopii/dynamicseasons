@@ -10,9 +10,13 @@ import com.gammamicroscopii.mixed.ServerWorldMixed;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycle;
 import com.gammamicroscopii.resourceload.data.SeasonalBlockCycles;
 import com.gammamicroscopii.resourceload.data.SeasonallyDisappearingSoilBlocksJson;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonWriter;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.block.*;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.MinecraftServer;
@@ -22,6 +26,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.Util;
+import net.minecraft.util.WorldSavePath;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
@@ -33,9 +38,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.WorldChunk;
 
+import java.io.*;
+import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.RandomAccess;
 
 import static com.gammamicroscopii.Temperature.*;
+import static com.gammamicroscopii.world.ModChunkDataEncoding.createDataFileIfNotExists;
+import static com.gammamicroscopii.world.ModChunkDataEncoding.getPathToDimension;
 
 
 public class ServerWorldTick {
@@ -53,6 +63,7 @@ public class ServerWorldTick {
 	});
 
 
+
 	public static void init() {
 
 		ServerWorldEvents.LOAD.register((minecraftServer, serverWorld) -> {
@@ -62,6 +73,27 @@ public class ServerWorldTick {
 
 			for (SeasonalBlockCycle cycle : SeasonalBlockCycles.getSeasonalBlockCycleMap().values()) {
 				cycle.updateCycleStage(((ServerWorldMixed)minecraftServer.getOverworld()).getSeasonInfo().getSeason());
+			}
+
+
+
+
+			try {
+				/*Path path = minecraftServer.getSavePath(WorldSavePath.ROOT).resolve("dynamicseasons_regions");
+
+				File f = path.toFile();
+				f.mkdir();
+				//DynamicSeasons.LOGGER.info(serverWorld.getRegistryKey().getValue().toString());
+
+				Path path2 = ;*/
+
+				File f = getPathToDimension(serverWorld).toFile();
+				f.mkdirs();
+
+				//RandomAccessFile raf = new RandomAccessFile(f, "rw");
+				//raf.writeLong(0);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
 			}
 		});
 
@@ -73,13 +105,27 @@ public class ServerWorldTick {
 
 			if (!(serverWorld == server.getOverworld())) return;
 
-			ServerWorldMixed swm = ((ServerWorldMixed) (Object) serverWorld);
+			ServerWorldMixed swm = ((ServerWorldMixed) serverWorld);
 			swm.setSeasonUpdateTimeout(swm.getSeasonUpdateTimeout() -1);
 			if (swm.getSeasonUpdateTimeout() <= 0) {
 				//swm.setSeasonUpdateTimeout(600);
 				SeasonHelper.updateSeason(serverWorld, false);
 			}
 		});
+
+		ServerChunkEvents.CHUNK_LOAD.register((serverWorld, worldChunk) -> {
+			long lastUnloadedTime = ModChunkDataEncoding.getLastUnloadedTime(serverWorld, worldChunk.getPos());
+			postProcessChunk(worldChunk, serverWorld, lastUnloadedTime);
+		});
+
+		ServerChunkEvents.CHUNK_UNLOAD.register((serverWorld, worldChunk) -> {
+			ModChunkDataEncoding.setLastUnloadedTime(serverWorld, worldChunk.getPos());
+		});
+
+	}
+
+	private static void postProcessChunk(WorldChunk worldChunk, ServerWorld serverWorld, long lastUnloadedTime) {
+		System.out.println("chunk: " + worldChunk.getPos() + ", last unloaded: " + lastUnloadedTime + ", time: " + serverWorld.getTimeOfDay() + "; " + (serverWorld.getTimeOfDay() - lastUnloadedTime) + " ticks ago");
 	}
 
 	public static void tickSeasonalBlockUpdates(WorldChunk chunk, int randomTickSpeed, ServerWorld world/*, ChunkPos chunkPos*/) {
@@ -174,12 +220,21 @@ public class ServerWorldTick {
 		BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
 		BlockState state = world.getBlockState(mutable);
 		boolean finished = false;
+		Direction randomDir;
 		for (int steps = 16; steps > 0 && !finished; steps--) {
 
 			if (!state.isSolidBlock(world, mutable)) {
 				mutable.move(Direction.DOWN);
 				if (random.nextBoolean()) {
-					mutable.move(Direction.Type.HORIZONTAL.random(random), 1+random.nextInt(3));
+					randomDir = Direction.Type.HORIZONTAL.random(random);
+					int randombtwn1and3 = 1+random.nextInt(3);
+					for (int i = 0; i < randombtwn1and3; i++) {
+						if (!world.getBlockState(mutable.offset(randomDir)).isSolidBlock(world, mutable)) {
+							mutable.move(randomDir);
+						} else {
+							break;
+						}
+					}
 				}
 				state = world.getBlockState(mutable);
 			} else {

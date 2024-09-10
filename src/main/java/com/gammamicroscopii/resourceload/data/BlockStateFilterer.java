@@ -21,7 +21,7 @@ public class BlockStateFilterer {
 	String id;
 	PropertyValue[] propertyValues;
 
-	private HashMap<BlockState, Boolean> FILTER_CACHE = new HashMap<>();
+	private final HashMap<BlockState, Boolean> FILTER_CACHE = new HashMap<>();
 
 
 	public BlockStateFilterer(String id, PropertyValue[] propertyValues) {

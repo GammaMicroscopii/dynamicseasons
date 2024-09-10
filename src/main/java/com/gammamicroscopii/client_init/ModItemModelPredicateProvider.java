@@ -39,7 +39,7 @@ public class ModItemModelPredicateProvider {
 
 			@Override
 			public float unclampedCall(ItemStack itemStack, @Nullable ClientWorld clientWorld, @Nullable LivingEntity livingEntity, int i) {
-				Entity entity = (Entity)(livingEntity != null ? livingEntity : itemStack.getHolder());
+				Entity entity = livingEntity != null ? livingEntity : itemStack.getHolder();
 				if (entity == null) {
 					return 0.0F;
 				} else {

@@ -1,0 +1,18 @@
+{
+  "parent": "block/thin_block",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "dynamicseasons:block/fallen_leaves_thinnest",
+    "layer0": "dynamicseasons:block/fallen_leaves_thinnest"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0.5, 0 ],
+      "to": [ 16, 0.5, 16 ],
+      "faces": {
+        "down": { "uv": [ 0, 0, 16, 16 ], "texture": "#layer0" },
+        "up": { "uv": [ 0, 0, 16, 16 ], "texture": "#layer0" }
+      }
+    }
+  ]
+}

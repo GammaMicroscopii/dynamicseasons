@@ -2,11 +2,15 @@
   "values": [
     {
       "block": "minecraft:pink_petals",
-      "start_season": 0.108333333333333,
+      "start_season": 0.133333333333333,
       "end_season": 0.908333333333333,
       "placed_by": [
         {
           "id": "minecraft:cherry_leaves",
+          "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
+        },
+        {
+          "id": "dynamicseasons:deflowering_cherry_leaves",
           "blockstates": [ { "property": "persistent", "affected_values": [ false ] } ]
         }
       ]

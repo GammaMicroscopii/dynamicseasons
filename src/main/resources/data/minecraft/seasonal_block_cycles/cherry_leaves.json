@@ -59,9 +59,18 @@
       "previous_block_blockstates": [
         { "property": "persistent", "affected_values": [ false ] }
       ],
-      "turns_into": { "id": "dynamicseasons:flowerless_cherry_leaves" },
+      "turns_into": { "id": "dynamicseasons:deflowering_cherry_leaves" },
       "start_season": 0.95833333333333333,
       "end_season": 0.00833333333333333
+    },
+
+    {
+      "previous_block_blockstates": [
+        { "property": "persistent", "affected_values": [ false ] }
+      ],
+      "turns_into": { "id": "dynamicseasons:flowerless_cherry_leaves" },
+      "start_season": 0.00833333333333333,
+      "end_season": 0.05833333333333333
     }
   ]
 }

@@ -144,7 +144,7 @@ public class ServerWorldMixedDebug {
 /** ICE -> WATER, EXPOSED TO SKY, NOT RAINING 					SECTION 5												*/
 /** ICE -> WATER, NOT EXPOSED TO SKY							 			==> mixin.block.IceBlockMixin		*/
 
-class uncommentTheseAndDoAltIntro {
+class UncommentTheseAndDoAltIntro {
 
 	//	SnowBlockMixin dummySnow;
 	//	WaterFluidMixin dummyWater;

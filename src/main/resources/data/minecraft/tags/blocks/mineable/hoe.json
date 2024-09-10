@@ -20,6 +20,7 @@
     "dynamicseasons:leafing_out_oak_branches",
     "dynamicseasons:blossoming_cherry_branches",
     "dynamicseasons:leafing_out_dark_oak_branches",
-    "dynamicseasons:flowerless_cherry_leaves"
+    "dynamicseasons:flowerless_cherry_leaves",
+    "dynamicseasons:deflowering_cherry_leaves"
   ]
 }

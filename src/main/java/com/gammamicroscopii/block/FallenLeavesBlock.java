@@ -28,9 +28,10 @@ import static com.gammamicroscopii.world.SeasonHelper.calculateInverseRate;
 
 public class FallenLeavesBlock extends Block implements Waterloggable, SeasonallyDisappearingSoilBlock{
 
-	public static final int MAX_LAYERS = 17;
+	public static final int MAX_LAYERS = 18;
 	public static final IntProperty HEIGHT = IntProperty.of("height", 1, MAX_LAYERS);
 	protected static final VoxelShape[] LAYERS_TO_SHAPE = new VoxelShape[]{
+			Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.5, 16.0),
 			Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.5, 16.0),
 			Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.0, 16.0),
 			Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
@@ -79,7 +80,7 @@ public class FallenLeavesBlock extends Block implements Waterloggable, Seasonall
 
 	protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		int height = state.get(HEIGHT);
-		return height < 5 ? VoxelShapes.empty() : LAYERS_TO_SHAPE[height-5];
+		return height < 6 ? VoxelShapes.empty() : LAYERS_TO_SHAPE[height-5];
 	}
 
 	protected VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
@@ -124,7 +125,7 @@ public class FallenLeavesBlock extends Block implements Waterloggable, Seasonall
 				return true;
 			}
 		} else {
-			return i == 1;
+			return i < 3;
 		}
 	}
 
